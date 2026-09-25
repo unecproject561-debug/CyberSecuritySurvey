@@ -14,429 +14,493 @@
 
 <body>
 
-  <header class="hero">
+  <div class="page">
 
-    <div class="hero-content">
+    <header class="hero">
 
-      <div class="badge">
-        KİBERTƏHLÜKƏSİZLİK ARAŞDIRMASI
-      </div>
+      <div class="hero-content">
 
-      <h1>
-        CYBER<span>SAFE</span>
-      </h1>
-
-      <p>
-        Kibertəhlükəsizlik məlumatlılığı və rəqəmsal davranış
-        arasındakı əlaqənin statistik analizi
-      </p>
-
-    </div>
-
-  </header>
-
-
-  <main class="container">
-
-    <!-- PROGRESS -->
-
-    <div class="progress-card">
-
-      <div class="progress-info">
-
-        <span>Sorğunun tamamlanması</span>
-
-        <strong id="progressText">
-          0%
-        </strong>
-
-      </div>
-
-      <div class="progress-background">
-
-        <div
-          id="progress"
-          class="progress"
-          style="width: 0%"
-        ></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- SURVEY -->
-
-    <div id="survey">
-
-
-      <!-- PARTICIPANT -->
-
-      <section class="card participant-card">
-
-        <div class="section-label">
-          İŞTİRAKÇI
+        <div class="badge">
+          KİBERTƏHLÜKƏSİZLİK ARAŞDIRMASI
         </div>
 
-        <h2>
-          Əvvəlcə özünüzü təqdim edin
-        </h2>
+        <h1>
+          CYBER<span>SAFE</span>
+        </h1>
 
         <p>
-          Ad və soyadınızı daxil edin.
+          Kibertəhlükəsizlik məlumatlılığı və
+          rəqəmsal davranış arasındakı əlaqənin
+          statistik analizi
         </p>
 
-        <input
-          type="text"
-          id="participantName"
-          placeholder="Ad və soyad"
-          autocomplete="name"
-        >
+      </div>
 
-      </section>
+    </header>
 
 
+    <main class="survey-wrapper">
 
-      <!-- =========================
-           AWARENESS
-      ========================== -->
+      <!-- PROGRESS -->
 
-      <section class="card">
+      <div class="progress-card">
 
-        <div class="section-label">
-          BÖLMƏ 01 — MƏLUMATLILIQ
+        <div class="progress-top">
+
+          <span>
+            SORĞUNUN İRƏLİLƏYİŞİ
+          </span>
+
+          <strong id="progressText">
+            0%
+          </strong>
+
         </div>
 
-        <h2>
-          Kibertəhlükəsizlik məlumatlılığı
-        </h2>
+        <div class="progress-track">
 
-        <p class="section-description">
-          Aşağıdakı real vəziyyətləri diqqətlə oxuyun
-          və ən təhlükəsiz hesab etdiyiniz cavabı seçin.
-        </p>
+          <div
+            id="progress"
+            class="progress-bar"
+          ></div>
+
+        </div>
+
+      </div>
 
 
-        <!-- QUESTION 1 -->
+      <div id="survey">
 
-        <div class="question">
 
-          <div class="question-number">
-            SUAL 01
+        <!-- =========================
+             PARTICIPANT
+        ========================== -->
+
+        <section class="card participant-card">
+
+          <div class="card-label">
+            İŞTİRAKÇI MƏLUMATLARI
           </div>
-
-          <h3>
-            Universitetin IT şöbəsindən gəlmiş kimi görünən
-            emaildə hesabınızın 24 saat ərzində bağlanacağı
-            yazılıb. Göndərənin ünvanında universitet
-            domenində yalnız bir hərf fərqlənir və emaildə
-            “Hesabı aktivləşdir” düyməsi var. Nə edərdiniz?
-          </h3>
-
-          <label class="option">
-            <input type="radio" name="q1" value="A">
-            <span>A</span>
-            Linkə daxil olub hesabımı yoxlayaram.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q1" value="B">
-            <span>B</span>
-            Emaili cavablandırıb göndərəndən soruşaram.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q1" value="C">
-            <span>C</span>
-            Linkdən istifadə etmədən universitetin rəsmi
-            saytına daxil olub IT şöbəsi ilə əlaqə saxlayaram.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q1" value="D">
-            <span>D</span>
-            Emaili başqa tələbələrə göndərib onların fikrini soruşaram.
-          </label>
-
-        </div>
-
-
-        <!-- QUESTION 2 -->
-
-        <div class="question">
-
-          <div class="question-number">
-            SUAL 02
-          </div>
-
-          <h3>
-            Bir veb-saytda brauzerin kilid işarəsi görünür
-            və ünvan HTTPS ilə başlayır. Sayt sizdən bank
-            kartı məlumatlarınızı istəyir, lakin domen adı
-            şirkətin rəsmi domenindən bir hərflə fərqlənir.
-            Əsas risk nədir?
-          </h3>
-
-          <label class="option">
-            <input type="radio" name="q2" value="A">
-            <span>A</span>
-            Saytın internet sürəti aşağıdır.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q2" value="B">
-            <span>B</span>
-            HTTPS olmadığı üçün məlumatlar qorunmur.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q2" value="C">
-            <span>C</span>
-            Sayt saxta ola bilər və HTTPS təkbaşına
-            onun etibarlı olduğunu göstərmir.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q2" value="D">
-            <span>D</span>
-            Bank kartı ilə internetdə ödəniş etmək
-            həmişə təhlükəlidir.
-          </label>
-
-        </div>
-
-
-        <!-- QUESTION 3 -->
-
-        <div class="question">
-
-          <div class="question-number">
-            SUAL 03
-          </div>
-
-          <h3>
-            WhatsApp-da tanımadığınız şəxs sizə PDF göndərir
-            və “sənədin məzmununu görmək üçün Microsoft
-            hesabınızla daxil olun” deyir. Ən təhlükəsiz
-            yanaşma hansıdır?
-          </h3>
-
-          <label class="option">
-            <input type="radio" name="q3" value="A">
-            <span>A</span>
-            PDF-i açıb hesabımla daxil olmaq.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q3" value="B">
-            <span>B</span>
-            Linki əvvəlcə telefonda yoxlamaq.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q3" value="C">
-            <span>C</span>
-            Hesab məlumatlarını daxil etməmək və mənbəni
-            müstəqil şəkildə yoxlamaq.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q3" value="D">
-            <span>D</span>
-            Faylı dostuma göndərib onun açmasını istəmək.
-          </label>
-
-        </div>
-
-
-        <!-- QUESTION 4 -->
-
-        <div class="question">
-
-          <div class="question-number">
-            SUAL 04
-          </div>
-
-          <h3>
-            Siz heç bir giriş etmədiyiniz halda telefonunuza
-            ardıcıl olaraq bir neçə MFA təsdiq bildirişi gəlir.
-            Bildirişlərdən biri “Təsdiqlə” və “Rədd et”
-            seçimləri verir. Bu vəziyyət nə ola bilər?
-          </h3>
-
-          <label class="option">
-            <input type="radio" name="q4" value="A">
-            <span>A</span>
-            Sistem yenilənməsi.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q4" value="B">
-            <span>B</span>
-            MFA yorğunluğu / push bombing hücumu.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q4" value="C">
-            <span>C</span>
-            İnternet bağlantısı problemi.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q4" value="D">
-            <span>D</span>
-            Antivirus xəbərdarlığı.
-          </label>
-
-        </div>
-
-
-        <!-- QUESTION 5 -->
-
-        <div class="question">
-
-          <div class="question-number">
-            SUAL 05
-          </div>
-
-          <h3>
-            Kompüterinizdə fayllar birdən açılmır, adlarının
-            sonuna naməlum uzantı əlavə olunur və ekranda
-            faylları bərpa etmək üçün ödəniş tələb edən mesaj
-            görünür. Bu hansı hücuma daha çox uyğundur?
-          </h3>
-
-          <label class="option">
-            <input type="radio" name="q5" value="A">
-            <span>A</span>
-            DDoS.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q5" value="B">
-            <span>B</span>
-            Phishing.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q5" value="C">
-            <span>C</span>
-            Ransomware.
-          </label>
-
-          <label class="option">
-            <input type="radio" name="q5" value="D">
-            <span>D</span>
-            Spoofing.
-          </label>
-
-        </div>
-
-      </section>
-
-
-
-      <!-- =========================
-           SECURITY BEHAVIOR
-      ========================== -->
-
-      <section class="card">
-
-        <div class="section-label">
-          BÖLMƏ 02 — TƏHLÜKƏSİZLİK DAVRANIŞI
-        </div>
-
-        <h2>
-          Təhlükəsizlik davranışı
-        </h2>
-
-        <p class="section-description">
-          Hər ifadəyə uyğun davranış tezliyinizi seçin.
-        </p>
-
-        <div id="securityQuestions"></div>
-
-      </section>
-
-
-
-      <!-- =========================
-           DIGITAL BEHAVIOR
-      ========================== -->
-
-      <section class="card">
-
-        <div class="section-label">
-          BÖLMƏ 03 — RƏQƏMSAL DAVRANIŞ
-        </div>
-
-        <h2>
-          Rəqəmsal davranış
-        </h2>
-
-        <p class="section-description">
-          Gündəlik rəqəmsal davranışınızı ən düzgün
-          ifadə edən variantı seçin.
-        </p>
-
-        <div id="digitalQuestions"></div>
-
-      </section>
-
-
-
-      <!-- SUBMIT -->
-
-      <section class="submit-card">
-
-        <div>
 
           <h2>
-            Sorğunu tamamladınız?
+            Sorğuda iştirak edin
           </h2>
 
           <p>
-            Cavablarınızı yoxladıqdan sonra göndərin.
+            Zəhmət olmasa ad və soyadınızı daxil edin.
           </p>
 
-        </div>
+          <input
+            type="text"
+            id="participantName"
+            placeholder="Ad və soyadınızı yazın..."
+            autocomplete="name"
+          >
 
-        <button
-          id="submitBtn"
-          type="button"
-        >
-
-          <span>
-            Sorğunu göndər
-          </span>
-
-          <b>
-            →
-          </b>
-
-        </button>
-
-      </section>
+        </section>
 
 
-      <div
-        id="message"
-        class="message"
-      ></div>
+        <!-- =========================
+             AWARENESS
+        ========================== -->
+
+        <section class="card">
+
+          <div class="card-label">
+            BÖLMƏ 01
+          </div>
+
+          <h2>
+            Kibertəhlükəsizlik məlumatlılığı
+          </h2>
+
+          <p class="description">
+            Aşağıdakı suallara cavab verin.
+          </p>
 
 
-    </div>
+          <!-- Q1 -->
 
-  </main>
+          <div class="question">
+
+            <div class="question-number">
+              SUAL 01
+            </div>
+
+            <p>
+              Universitet hesabınızla bağlı email alırsınız.
+              Emaildə hesabınızın 24 saat ərzində bağlanacağı
+              və hesabı aktiv saxlamaq üçün linkə daxil olmağınız
+              tələb olunur. Göndərənin domeni universitetin
+              domenindən yalnız bir hərflə fərqlənir.
+              Nə edərdiniz?
+            </p>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q1"
+                value="1"
+              >
+              <span>Linkə daxil olub hesabımı aktivləşdirərdim.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q1"
+                value="0"
+              >
+              <span>Emaili cavablandırıb göndərəndən soruşardım.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q1"
+                value="0"
+              >
+              <span>Linkdən istifadə etmədən universitetin rəsmi saytına daxil olub IT şöbəsi ilə əlaqə saxlayardım.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q1"
+                value="0"
+              >
+              <span>Emaili başqa tələbələrə göndərib onların fikrini soruşardım.</span>
+            </label>
+
+          </div>
 
 
-  <footer>
+          <!-- Q2 -->
 
-    <p>
-      CYBERSAFE — Akademik statistik araşdırma
-    </p>
+          <div class="question">
 
-  </footer>
+            <div class="question-number">
+              SUAL 02
+            </div>
+
+            <p>
+              Bir veb-sayt HTTPS istifadə edir və brauzerdə
+              kilid işarəsi görünür. Sayt sizdən bank kartı
+              məlumatlarını istəyir, lakin domen adı şirkətin
+              rəsmi domenindən bir hərflə fərqlənir.
+              Əsas risk nədir?
+            </p>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q2"
+                value="0"
+              >
+              <span>Saytın internet sürəti aşağıdır.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q2"
+                value="0"
+              >
+              <span>HTTPS olmadığı üçün məlumatlar qorunmur.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q2"
+                value="1"
+              >
+              <span>Sayt saxta ola bilər və HTTPS təkbaşına onun etibarlı olduğunu göstərmir.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q2"
+                value="0"
+              >
+              <span>Bank kartı ilə internetdə ödəniş etmək həmişə təhlükəlidir.</span>
+            </label>
+
+          </div>
+
+
+          <!-- Q3 -->
+
+          <div class="question">
+
+            <div class="question-number">
+              SUAL 03
+            </div>
+
+            <p>
+              WhatsApp-da tanımadığınız şəxs sizə PDF göndərir
+              və sənədi görmək üçün Microsoft hesabınızla daxil
+              olmağınızı istəyir. Ən təhlükəsiz yanaşma hansıdır?
+            </p>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q3"
+                value="0"
+              >
+              <span>PDF-i açıb hesabımla daxil olmaq.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q3"
+                value="0"
+              >
+              <span>Linki əvvəlcə telefonda yoxlamaq.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q3"
+                value="1"
+              >
+              <span>Hesab məlumatlarını daxil etməmək və mənbəni müstəqil şəkildə yoxlamaq.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q3"
+                value="0"
+              >
+              <span>Faylı dostuma göndərib onun açmasını istəmək.</span>
+            </label>
+
+          </div>
+
+
+          <!-- Q4 -->
+
+          <div class="question">
+
+            <div class="question-number">
+              SUAL 04
+            </div>
+
+            <p>
+              Siz heç bir giriş etmədiyiniz halda telefonunuza
+              ardıcıl olaraq bir neçə MFA təsdiq bildirişi gəlir.
+              Bu vəziyyət nə ola bilər?
+            </p>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q4"
+                value="0"
+              >
+              <span>Sistem yenilənməsi.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q4"
+                value="1"
+              >
+              <span>MFA yorğunluğu / push bombing hücumu.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q4"
+                value="0"
+              >
+              <span>İnternet bağlantısı problemi.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q4"
+                value="0"
+              >
+              <span>Antivirus xəbərdarlığı.</span>
+            </label>
+
+          </div>
+
+
+          <!-- Q5 -->
+
+          <div class="question">
+
+            <div class="question-number">
+              SUAL 05
+            </div>
+
+            <p>
+              Kompüterinizdə fayllar birdən açılmır, adlarının
+              sonuna naməlum uzantı əlavə olunur və ekranda
+              faylları bərpa etmək üçün ödəniş tələb edən mesaj
+              görünür. Bu hansı hücuma daha çox uyğundur?
+            </p>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q5"
+                value="0"
+              >
+              <span>DDoS.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q5"
+                value="0"
+              >
+              <span>Phishing.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q5"
+                value="1"
+              >
+              <span>Ransomware.</span>
+            </label>
+
+            <label class="option">
+              <input
+                type="radio"
+                name="q5"
+                value="0"
+              >
+              <span>Spoofing.</span>
+            </label>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             SECURITY
+        ========================== -->
+
+        <section class="card">
+
+          <div class="card-label">
+            BÖLMƏ 02
+          </div>
+
+          <h2>
+            Təhlükəsizlik davranışı
+          </h2>
+
+          <p class="description">
+            Hər ifadəyə uyğun davranış tezliyinizi seçin.
+          </p>
+
+          <div id="securityQuestions"></div>
+
+        </section>
+
+
+        <!-- =========================
+             DIGITAL
+        ========================== -->
+
+        <section class="card">
+
+          <div class="card-label">
+            BÖLMƏ 03
+          </div>
+
+          <h2>
+            Rəqəmsal davranış
+          </h2>
+
+          <p class="description">
+            Gündəlik rəqəmsal davranışınızı qiymətləndirin.
+          </p>
+
+          <div id="digitalQuestions"></div>
+
+        </section>
+
+
+        <!-- =========================
+             SUBMIT
+        ========================== -->
+
+        <section class="submit-card">
+
+          <div>
+
+            <div class="card-label">
+              SON ADDIM
+            </div>
+
+            <h2>
+              Sorğunu göndərin
+            </h2>
+
+            <p>
+              Cavablarınızı yoxladıqdan sonra göndərmək üçün
+              düyməyə klikləyin.
+            </p>
+
+          </div>
+
+          <button
+            id="submitBtn"
+            type="button"
+          >
+            <span>
+              Sorğunu göndər
+            </span>
+
+            <b>
+              →
+            </b>
+          </button>
+
+        </section>
+
+
+        <div
+          id="message"
+          class="message"
+        ></div>
+
+
+      </div>
+
+    </main>
+
+
+    <footer>
+
+      <p>
+        CYBERSAFE
+      </p>
+
+      <span>
+        Kibertəhlükəsizlik üzrə akademik sorğu
+      </span>
+
+    </footer>
+
+  </div>
 
 
   <script src="script.js"></script>
