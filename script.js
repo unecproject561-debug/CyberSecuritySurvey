@@ -12,146 +12,172 @@ const supabaseClient =
   );
 
 
-// ================================
-// TƏHLÜKƏSİZLİK DAVRANIŞI
-// ================================
+// ==========================================
+// TƏHLÜKƏSİZLİK DAVRANIŞI SUALLARI
+// ==========================================
 
 const securityQuestions = [
+
   "İş və ya universitet hesablarım üçün eyni parolu başqa platformalarda istifadə etmirəm.",
+
   "Vacib hesablarımda iki mərhələli doğrulamanı (2FA/MFA) aktiv etmişəm.",
+
   "Proqram və əməliyyat sistemi yeniləmələrini təhlükəsizlik səbəbilə gecikdirmirəm.",
+
   "Email və mesajlarda gələn linkləri açmazdan əvvəl domeni və göndərəni yoxlayıram.",
+
   "Vacib məlumatların itirilməsinə qarşı müstəqil ehtiyat nüsxələr saxlayıram."
+
 ];
 
 
-// ================================
-// RƏQƏMSAL DAVRANIŞ
-// ================================
+// ==========================================
+// RƏQƏMSAL DAVRANIŞ SUALLARI
+// ==========================================
 
 const digitalQuestions = [
+
   "Sosial şəbəkədə paylaşım etməzdən əvvəl həmin məlumatın gələcəkdə mənə və ya başqasına təsirini nəzərə alıram.",
+
   "Tanımadığım şəxslərdən gələn dostluq, izləmə və mesaj sorğularının profilini yoxlayıram.",
+
   "Pulsuz proqram və faylları yükləyərkən mənbənin etibarlılığını və istifadəçi rəylərini yoxlayıram.",
+
   "Şəxsi məlumatlarımı onlayn xidmətə təqdim etməzdən əvvəl həmin məlumatın niyə tələb olunduğunu düşünürəm.",
+
   "Sosial şəbəkələrdə məxfilik parametrlərimi və tətbiqlərin hesabıma giriş icazələrini vaxtaşırı yoxlayıram."
+
 ];
 
 
-// ================================
-// SUAL YARATMA FUNKSİYASI
-// ================================
+// ==========================================
+// LIKERT SUALI YARAT
+// ==========================================
 
 function createScaleQuestion(text, number, prefix) {
 
-  const div = document.createElement("div");
+  const div =
+    document.createElement("div");
 
-  div.className = "scale-question";
+  div.className =
+    "scale-question";
 
   div.innerHTML = `
+
     <div class="question-number">
       SUAL ${String(number).padStart(2, "0")}
     </div>
 
-    <p>${text}</p>
+    <p>
+      ${text}
+    </p>
 
-    <label>
+    <label class="option">
       <input
         type="radio"
         name="${prefix}${number}"
         value="1"
       >
-      1 — Heç vaxt
+      <span>1 — Heç vaxt</span>
     </label>
 
-    <label>
+    <label class="option">
       <input
         type="radio"
         name="${prefix}${number}"
         value="2"
       >
-      2 — Nadir hallarda
+      <span>2 — Nadir hallarda</span>
     </label>
 
-    <label>
+    <label class="option">
       <input
         type="radio"
         name="${prefix}${number}"
         value="3"
       >
-      3 — Bəzən
+      <span>3 — Bəzən</span>
     </label>
 
-    <label>
+    <label class="option">
       <input
         type="radio"
         name="${prefix}${number}"
         value="4"
       >
-      4 — Çox vaxt
+      <span>4 — Çox vaxt</span>
     </label>
 
-    <label>
+    <label class="option">
       <input
         type="radio"
         name="${prefix}${number}"
         value="5"
       >
-      5 — Həmişə
+      <span>5 — Həmişə</span>
     </label>
+
   `;
 
   return div;
 }
 
 
-// ================================
-// SUALLARI HTML-Ə ƏLAVƏ ET
-// ================================
+// ==========================================
+// TƏHLÜKƏSİZLİK SUALLARINI YARAT
+// ==========================================
 
 const securityContainer =
-  document.getElementById("securityQuestions");
+  document.getElementById(
+    "securityQuestions"
+  );
 
-if (securityContainer) {
-
-  securityQuestions.forEach((question, index) => {
+securityQuestions.forEach(
+  (question, index) => {
 
     securityContainer.appendChild(
+
       createScaleQuestion(
         question,
         index + 1,
         "security"
       )
+
     );
 
-  });
+  }
+);
 
-}
 
+// ==========================================
+// RƏQƏMSAL SUALLARINI YARAT
+// ==========================================
 
 const digitalContainer =
-  document.getElementById("digitalQuestions");
+  document.getElementById(
+    "digitalQuestions"
+  );
 
-if (digitalContainer) {
-
-  digitalQuestions.forEach((question, index) => {
+digitalQuestions.forEach(
+  (question, index) => {
 
     digitalContainer.appendChild(
+
       createScaleQuestion(
         question,
         index + 1,
         "digital"
       )
+
     );
 
-  });
+  }
+);
 
-}
 
-
-// ================================
-// CAVABI GÖTÜR
-// ================================
+// ==========================================
+// CAVABI TAP
+// ==========================================
 
 function getAnswer(name) {
 
@@ -166,9 +192,9 @@ function getAnswer(name) {
 }
 
 
-// ================================
+// ==========================================
 // PROGRESS BAR
-// ================================
+// ==========================================
 
 function updateProgress() {
 
@@ -180,25 +206,36 @@ function updateProgress() {
   const questionNames =
     new Set();
 
-  allQuestions.forEach(input => {
-    questionNames.add(input.name);
-  });
+  allQuestions.forEach(
+    input => {
+
+      questionNames.add(
+        input.name
+      );
+
+    }
+  );
 
   let answered = 0;
 
-  questionNames.forEach(name => {
+  questionNames.forEach(
+    name => {
 
-    if (
-      document.querySelector(
-        `input[name="${name}"]:checked`
-      )
-    ) {
-      answered++;
+      if (
+        document.querySelector(
+          `input[name="${name}"]:checked`
+        )
+      ) {
+
+        answered++;
+
+      }
+
     }
+  );
 
-  });
-
-  const total = questionNames.size;
+  const total =
+    questionNames.size;
 
   const percentage =
     total === 0
@@ -207,21 +244,18 @@ function updateProgress() {
           (answered / total) * 100
         );
 
-  const progress =
-    document.getElementById("progress");
 
-  const progressText =
-    document.getElementById("progressText");
+  document.getElementById(
+    "progress"
+  ).style.width =
+    percentage + "%";
 
-  if (progress) {
-    progress.style.width =
-      percentage + "%";
-  }
 
-  if (progressText) {
-    progressText.textContent =
-      percentage + "%";
-  }
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    percentage + "%";
+
 }
 
 
@@ -231,33 +265,36 @@ document.addEventListener(
 );
 
 
-// ================================
-// SORĞUNU GÖNDƏR
-// ================================
+// ==========================================
+// GÖNDƏR
+// ==========================================
 
-const submitButton =
-  document.getElementById("submitBtn");
-
-if (submitButton) {
-
-  submitButton.addEventListener(
+document
+  .getElementById("submitBtn")
+  .addEventListener(
     "click",
     async () => {
 
       const name =
         document
-          .getElementById("participantName")
+          .getElementById(
+            "participantName"
+          )
           .value
           .trim();
 
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
 
       const button =
-        document.getElementById("submitBtn");
+        document.getElementById(
+          "submitBtn"
+        );
 
 
-      // AD YOXLAMASI
+      // AD
 
       if (!name) {
 
@@ -265,25 +302,33 @@ if (submitButton) {
           "⚠️ Zəhmət olmasa ad və soyadınızı daxil edin.";
 
         document
-          .getElementById("participantName")
+          .getElementById(
+            "participantName"
+          )
           .focus();
 
         return;
       }
 
 
-      // ================================
-      // MƏLUMATLILIQ
-      // ================================
+      // ====================================
+      // MƏLUMATLIQLIQ
+      // ====================================
 
       const awarenessAnswers = [];
 
-      for (let i = 1; i <= 5; i++) {
+      for (
+        let i = 1;
+        i <= 5;
+        i++
+      ) {
 
         const answer =
           getAnswer(`q${i}`);
 
-        if (answer === null) {
+        if (
+          answer === null
+        ) {
 
           message.textContent =
             `⚠️ Məlumatlılıq bölməsində Sual ${i} cavablandırılmayıb.`;
@@ -291,22 +336,33 @@ if (submitButton) {
           return;
         }
 
-        awarenessAnswers.push(answer);
+        awarenessAnswers.push(
+          answer
+        );
+
       }
 
 
-      // ================================
-      // TƏHLÜKƏSİZLİK DAVRANIŞI
-      // ================================
+      // ====================================
+      // TƏHLÜKƏSİZLİK
+      // ====================================
 
       const securityAnswers = [];
 
-      for (let i = 1; i <= 5; i++) {
+      for (
+        let i = 1;
+        i <= 5;
+        i++
+      ) {
 
         const answer =
-          getAnswer(`security${i}`);
+          getAnswer(
+            `security${i}`
+          );
 
-        if (answer === null) {
+        if (
+          answer === null
+        ) {
 
           message.textContent =
             `⚠️ Təhlükəsizlik davranışı bölməsində Sual ${i} cavablandırılmayıb.`;
@@ -314,22 +370,33 @@ if (submitButton) {
           return;
         }
 
-        securityAnswers.push(answer);
+        securityAnswers.push(
+          answer
+        );
+
       }
 
 
-      // ================================
-      // RƏQƏMSAL DAVRANIŞ
-      // ================================
+      // ====================================
+      // RƏQƏMSAL
+      // ====================================
 
       const digitalAnswers = [];
 
-      for (let i = 1; i <= 5; i++) {
+      for (
+        let i = 1;
+        i <= 5;
+        i++
+      ) {
 
         const answer =
-          getAnswer(`digital${i}`);
+          getAnswer(
+            `digital${i}`
+          );
 
-        if (answer === null) {
+        if (
+          answer === null
+        ) {
 
           message.textContent =
             `⚠️ Rəqəmsal davranış bölməsində Sual ${i} cavablandırılmayıb.`;
@@ -337,13 +404,16 @@ if (submitButton) {
           return;
         }
 
-        digitalAnswers.push(answer);
+        digitalAnswers.push(
+          answer
+        );
+
       }
 
 
-      // ================================
+      // ====================================
       // BALLAR
-      // ================================
+      // ====================================
 
       const awarenessScore =
         awarenessAnswers.reduce(
@@ -372,9 +442,9 @@ if (submitButton) {
         digitalScore;
 
 
-      // ================================
+      // ====================================
       // CAVABLAR
-      // ================================
+      // ====================================
 
       const answers = {
 
@@ -390,11 +460,12 @@ if (submitButton) {
       };
 
 
-      // ================================
-      // GÖNDƏRİLİR
-      // ================================
+      // ====================================
+      // SUPABASE
+      // ====================================
 
-      button.disabled = true;
+      button.disabled =
+        true;
 
       button.innerHTML =
         "<span>Göndərilir...</span>";
@@ -402,7 +473,9 @@ if (submitButton) {
 
       const { error } =
         await supabaseClient
-          .from("survey_responses")
+          .from(
+            "survey_responses"
+          )
           .insert({
 
             participant_name:
@@ -426,15 +499,18 @@ if (submitButton) {
           });
 
 
-      // ================================
+      // ====================================
       // XƏTA
-      // ================================
+      // ====================================
 
       if (error) {
 
-        console.error(error);
+        console.error(
+          error
+        );
 
-        button.disabled = false;
+        button.disabled =
+          false;
 
         button.innerHTML =
           "<span>Sorğunu göndər</span><b>→</b>";
@@ -446,9 +522,9 @@ if (submitButton) {
       }
 
 
-      // ================================
+      // ====================================
       // UĞURLU
-      // ================================
+      // ====================================
 
       document.getElementById(
         "survey"
@@ -488,9 +564,7 @@ if (submitButton) {
     }
   );
 
-}
 
-
-// İlk açılışda progress
+// İlk açılış
 updateProgress();
 ```
