@@ -1,3 +1,4 @@
+```javascript
 const SUPABASE_URL =
   "https://tzrmnihtnhfvblxfmpmq.supabase.co";
 
@@ -11,9 +12,9 @@ const supabaseClient =
   );
 
 
-/* =========================
-   SUALLAR
-========================= */
+// ================================
+// TƏHLÜKƏSİZLİK DAVRANIŞI
+// ================================
 
 const securityQuestions = [
   "İş və ya universitet hesablarım üçün eyni parolu başqa platformalarda istifadə etmirəm.",
@@ -22,6 +23,11 @@ const securityQuestions = [
   "Email və mesajlarda gələn linkləri açmazdan əvvəl domeni və göndərəni yoxlayıram.",
   "Vacib məlumatların itirilməsinə qarşı müstəqil ehtiyat nüsxələr saxlayıram."
 ];
+
+
+// ================================
+// RƏQƏMSAL DAVRANIŞ
+// ================================
 
 const digitalQuestions = [
   "Sosial şəbəkədə paylaşım etməzdən əvvəl həmin məlumatın gələcəkdə mənə və ya başqasına təsirini nəzərə alıram.",
@@ -32,9 +38,9 @@ const digitalQuestions = [
 ];
 
 
-/* =========================
-   LIKERT SUALLARI YARAT
-========================= */
+// ================================
+// SUAL YARATMA FUNKSİYASI
+// ================================
 
 function createScaleQuestion(text, number, prefix) {
 
@@ -50,27 +56,47 @@ function createScaleQuestion(text, number, prefix) {
     <p>${text}</p>
 
     <label>
-      <input type="radio" name="${prefix}${number}" value="1">
+      <input
+        type="radio"
+        name="${prefix}${number}"
+        value="1"
+      >
       1 — Heç vaxt
     </label>
 
     <label>
-      <input type="radio" name="${prefix}${number}" value="2">
+      <input
+        type="radio"
+        name="${prefix}${number}"
+        value="2"
+      >
       2 — Nadir hallarda
     </label>
 
     <label>
-      <input type="radio" name="${prefix}${number}" value="3">
+      <input
+        type="radio"
+        name="${prefix}${number}"
+        value="3"
+      >
       3 — Bəzən
     </label>
 
     <label>
-      <input type="radio" name="${prefix}${number}" value="4">
+      <input
+        type="radio"
+        name="${prefix}${number}"
+        value="4"
+      >
       4 — Çox vaxt
     </label>
 
     <label>
-      <input type="radio" name="${prefix}${number}" value="5">
+      <input
+        type="radio"
+        name="${prefix}${number}"
+        value="5"
+      >
       5 — Həmişə
     </label>
   `;
@@ -79,45 +105,53 @@ function createScaleQuestion(text, number, prefix) {
 }
 
 
-/* =========================
-   SUALLARI HTML-Ə ƏLAVƏ ET
-========================= */
+// ================================
+// SUALLARI HTML-Ə ƏLAVƏ ET
+// ================================
 
 const securityContainer =
   document.getElementById("securityQuestions");
 
-securityQuestions.forEach((question, index) => {
+if (securityContainer) {
 
-  securityContainer.appendChild(
-    createScaleQuestion(
-      question,
-      index + 1,
-      "security"
-    )
-  );
+  securityQuestions.forEach((question, index) => {
 
-});
+    securityContainer.appendChild(
+      createScaleQuestion(
+        question,
+        index + 1,
+        "security"
+      )
+    );
+
+  });
+
+}
 
 
 const digitalContainer =
   document.getElementById("digitalQuestions");
 
-digitalQuestions.forEach((question, index) => {
+if (digitalContainer) {
 
-  digitalContainer.appendChild(
-    createScaleQuestion(
-      question,
-      index + 1,
-      "digital"
-    )
-  );
+  digitalQuestions.forEach((question, index) => {
 
-});
+    digitalContainer.appendChild(
+      createScaleQuestion(
+        question,
+        index + 1,
+        "digital"
+      )
+    );
+
+  });
+
+}
 
 
-/* =========================
-   CAVAB AL
-========================= */
+// ================================
+// CAVABI GÖTÜR
+// ================================
 
 function getAnswer(name) {
 
@@ -132,9 +166,9 @@ function getAnswer(name) {
 }
 
 
-/* =========================
-   PROGRESS BAR
-========================= */
+// ================================
+// PROGRESS BAR
+// ================================
 
 function updateProgress() {
 
@@ -167,19 +201,27 @@ function updateProgress() {
   const total = questionNames.size;
 
   const percentage =
-    Math.round(
-      (answered / total) * 100
-    );
+    total === 0
+      ? 0
+      : Math.round(
+          (answered / total) * 100
+        );
 
-  document.getElementById(
-    "progress"
-  ).style.width =
-    percentage + "%";
+  const progress =
+    document.getElementById("progress");
 
-  document.getElementById(
-    "progressText"
-  ).textContent =
-    percentage + "%";
+  const progressText =
+    document.getElementById("progressText");
+
+  if (progress) {
+    progress.style.width =
+      percentage + "%";
+  }
+
+  if (progressText) {
+    progressText.textContent =
+      percentage + "%";
+  }
 }
 
 
@@ -189,38 +231,33 @@ document.addEventListener(
 );
 
 
-/* =========================
-   SORĞUNU GÖNDƏR
-========================= */
+// ================================
+// SORĞUNU GÖNDƏR
+// ================================
 
-document
-  .getElementById("submitBtn")
-  .addEventListener(
+const submitButton =
+  document.getElementById("submitBtn");
+
+if (submitButton) {
+
+  submitButton.addEventListener(
     "click",
     async () => {
 
       const name =
         document
-          .getElementById(
-            "participantName"
-          )
+          .getElementById("participantName")
           .value
           .trim();
 
-
       const message =
-        document.getElementById(
-          "message"
-        );
-
+        document.getElementById("message");
 
       const button =
-        document.getElementById(
-          "submitBtn"
-        );
+        document.getElementById("submitBtn");
 
 
-      /* AD YOXLAMASI */
+      // AD YOXLAMASI
 
       if (!name) {
 
@@ -228,18 +265,16 @@ document
           "⚠️ Zəhmət olmasa ad və soyadınızı daxil edin.";
 
         document
-          .getElementById(
-            "participantName"
-          )
+          .getElementById("participantName")
           .focus();
 
         return;
       }
 
 
-      /* =========================
-         MƏLUMATLILIQ
-      ========================= */
+      // ================================
+      // MƏLUMATLILIQ
+      // ================================
 
       const awarenessAnswers = [];
 
@@ -260,18 +295,16 @@ document
       }
 
 
-      /* =========================
-         TƏHLÜKƏSİZLİK DAVRANIŞI
-      ========================= */
+      // ================================
+      // TƏHLÜKƏSİZLİK DAVRANIŞI
+      // ================================
 
       const securityAnswers = [];
 
       for (let i = 1; i <= 5; i++) {
 
         const answer =
-          getAnswer(
-            `security${i}`
-          );
+          getAnswer(`security${i}`);
 
         if (answer === null) {
 
@@ -285,18 +318,16 @@ document
       }
 
 
-      /* =========================
-         RƏQƏMSAL DAVRANIŞ
-      ========================= */
+      // ================================
+      // RƏQƏMSAL DAVRANIŞ
+      // ================================
 
       const digitalAnswers = [];
 
       for (let i = 1; i <= 5; i++) {
 
         const answer =
-          getAnswer(
-            `digital${i}`
-          );
+          getAnswer(`digital${i}`);
 
         if (answer === null) {
 
@@ -310,9 +341,9 @@ document
       }
 
 
-      /* =========================
-         BALLAR
-      ========================= */
+      // ================================
+      // BALLAR
+      // ================================
 
       const awarenessScore =
         awarenessAnswers.reduce(
@@ -321,14 +352,12 @@ document
           0
         );
 
-
       const securityScore =
         securityAnswers.reduce(
           (sum, value) =>
             sum + value,
           0
         );
-
 
       const digitalScore =
         digitalAnswers.reduce(
@@ -337,16 +366,15 @@ document
           0
         );
 
-
       const totalScore =
         awarenessScore +
         securityScore +
         digitalScore;
 
 
-      /* =========================
-         CAVABLAR
-      ========================= */
+      // ================================
+      // CAVABLAR
+      // ================================
 
       const answers = {
 
@@ -362,9 +390,9 @@ document
       };
 
 
-      /* =========================
-         GÖNDƏRİLİR
-      ========================= */
+      // ================================
+      // GÖNDƏRİLİR
+      // ================================
 
       button.disabled = true;
 
@@ -372,15 +400,9 @@ document
         "<span>Göndərilir...</span>";
 
 
-      /* =========================
-         SUPABASE
-      ========================= */
-
       const { error } =
         await supabaseClient
-          .from(
-            "survey_responses"
-          )
+          .from("survey_responses")
           .insert({
 
             participant_name:
@@ -404,9 +426,9 @@ document
           });
 
 
-      /* =========================
-         XƏTA
-      ========================= */
+      // ================================
+      // XƏTA
+      // ================================
 
       if (error) {
 
@@ -424,9 +446,9 @@ document
       }
 
 
-      /* =========================
-         UĞURLU
-      ========================= */
+      // ================================
+      // UĞURLU
+      // ================================
 
       document.getElementById(
         "survey"
@@ -465,3 +487,10 @@ document
 
     }
   );
+
+}
+
+
+// İlk açılışda progress
+updateProgress();
+```
