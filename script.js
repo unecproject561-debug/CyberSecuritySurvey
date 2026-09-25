@@ -1,4 +1,3 @@
-```javascript
 const SUPABASE_URL =
   "https://tzrmnihtnhfvblxfmpmq.supabase.co";
 
@@ -12,172 +11,113 @@ const supabaseClient =
   );
 
 
-// ==========================================
-// TƏHLÜKƏSİZLİK DAVRANIŞI SUALLARI
-// ==========================================
+/* =========================
+   SUALLAR
+========================= */
 
 const securityQuestions = [
-
   "İş və ya universitet hesablarım üçün eyni parolu başqa platformalarda istifadə etmirəm.",
-
   "Vacib hesablarımda iki mərhələli doğrulamanı (2FA/MFA) aktiv etmişəm.",
-
   "Proqram və əməliyyat sistemi yeniləmələrini təhlükəsizlik səbəbilə gecikdirmirəm.",
-
   "Email və mesajlarda gələn linkləri açmazdan əvvəl domeni və göndərəni yoxlayıram.",
-
   "Vacib məlumatların itirilməsinə qarşı müstəqil ehtiyat nüsxələr saxlayıram."
-
 ];
-
-
-// ==========================================
-// RƏQƏMSAL DAVRANIŞ SUALLARI
-// ==========================================
 
 const digitalQuestions = [
-
   "Sosial şəbəkədə paylaşım etməzdən əvvəl həmin məlumatın gələcəkdə mənə və ya başqasına təsirini nəzərə alıram.",
-
   "Tanımadığım şəxslərdən gələn dostluq, izləmə və mesaj sorğularının profilini yoxlayıram.",
-
   "Pulsuz proqram və faylları yükləyərkən mənbənin etibarlılığını və istifadəçi rəylərini yoxlayıram.",
-
   "Şəxsi məlumatlarımı onlayn xidmətə təqdim etməzdən əvvəl həmin məlumatın niyə tələb olunduğunu düşünürəm.",
-
   "Sosial şəbəkələrdə məxfilik parametrlərimi və tətbiqlərin hesabıma giriş icazələrini vaxtaşırı yoxlayıram."
-
 ];
 
 
-// ==========================================
-// LIKERT SUALI YARAT
-// ==========================================
+/* =========================
+   LIKERT SUALLARI YARAT
+========================= */
 
 function createScaleQuestion(text, number, prefix) {
 
-  const div =
-    document.createElement("div");
+  const div = document.createElement("div");
 
-  div.className =
-    "scale-question";
+  div.className = "scale-question";
 
   div.innerHTML = `
-
     <div class="question-number">
       SUAL ${String(number).padStart(2, "0")}
     </div>
 
-    <p>
-      ${text}
-    </p>
+    <p>${text}</p>
 
-    <label class="option">
-      <input
-        type="radio"
-        name="${prefix}${number}"
-        value="1"
-      >
-      <span>1 — Heç vaxt</span>
+    <label>
+      <input type="radio" name="${prefix}${number}" value="1">
+      1 — Heç vaxt
     </label>
 
-    <label class="option">
-      <input
-        type="radio"
-        name="${prefix}${number}"
-        value="2"
-      >
-      <span>2 — Nadir hallarda</span>
+    <label>
+      <input type="radio" name="${prefix}${number}" value="2">
+      2 — Nadir hallarda
     </label>
 
-    <label class="option">
-      <input
-        type="radio"
-        name="${prefix}${number}"
-        value="3"
-      >
-      <span>3 — Bəzən</span>
+    <label>
+      <input type="radio" name="${prefix}${number}" value="3">
+      3 — Bəzən
     </label>
 
-    <label class="option">
-      <input
-        type="radio"
-        name="${prefix}${number}"
-        value="4"
-      >
-      <span>4 — Çox vaxt</span>
+    <label>
+      <input type="radio" name="${prefix}${number}" value="4">
+      4 — Çox vaxt
     </label>
 
-    <label class="option">
-      <input
-        type="radio"
-        name="${prefix}${number}"
-        value="5"
-      >
-      <span>5 — Həmişə</span>
+    <label>
+      <input type="radio" name="${prefix}${number}" value="5">
+      5 — Həmişə
     </label>
-
   `;
 
   return div;
 }
 
 
-// ==========================================
-// TƏHLÜKƏSİZLİK SUALLARINI YARAT
-// ==========================================
+/* =========================
+   SUALLARI HTML-Ə ƏLAVƏ ET
+========================= */
 
 const securityContainer =
-  document.getElementById(
-    "securityQuestions"
+  document.getElementById("securityQuestions");
+
+securityQuestions.forEach((question, index) => {
+
+  securityContainer.appendChild(
+    createScaleQuestion(
+      question,
+      index + 1,
+      "security"
+    )
   );
 
-securityQuestions.forEach(
-  (question, index) => {
+});
 
-    securityContainer.appendChild(
-
-      createScaleQuestion(
-        question,
-        index + 1,
-        "security"
-      )
-
-    );
-
-  }
-);
-
-
-// ==========================================
-// RƏQƏMSAL SUALLARINI YARAT
-// ==========================================
 
 const digitalContainer =
-  document.getElementById(
-    "digitalQuestions"
+  document.getElementById("digitalQuestions");
+
+digitalQuestions.forEach((question, index) => {
+
+  digitalContainer.appendChild(
+    createScaleQuestion(
+      question,
+      index + 1,
+      "digital"
+    )
   );
 
-digitalQuestions.forEach(
-  (question, index) => {
-
-    digitalContainer.appendChild(
-
-      createScaleQuestion(
-        question,
-        index + 1,
-        "digital"
-      )
-
-    );
-
-  }
-);
+});
 
 
-// ==========================================
-// CAVABI TAP
-// ==========================================
+/* =========================
+   CAVAB AL
+========================= */
 
 function getAnswer(name) {
 
@@ -192,9 +132,9 @@ function getAnswer(name) {
 }
 
 
-// ==========================================
-// PROGRESS BAR
-// ==========================================
+/* =========================
+   PROGRESS BAR
+========================= */
 
 function updateProgress() {
 
@@ -206,56 +146,40 @@ function updateProgress() {
   const questionNames =
     new Set();
 
-  allQuestions.forEach(
-    input => {
-
-      questionNames.add(
-        input.name
-      );
-
-    }
-  );
+  allQuestions.forEach(input => {
+    questionNames.add(input.name);
+  });
 
   let answered = 0;
 
-  questionNames.forEach(
-    name => {
+  questionNames.forEach(name => {
 
-      if (
-        document.querySelector(
-          `input[name="${name}"]:checked`
-        )
-      ) {
-
-        answered++;
-
-      }
-
+    if (
+      document.querySelector(
+        `input[name="${name}"]:checked`
+      )
+    ) {
+      answered++;
     }
-  );
 
-  const total =
-    questionNames.size;
+  });
+
+  const total = questionNames.size;
 
   const percentage =
-    total === 0
-      ? 0
-      : Math.round(
-          (answered / total) * 100
-        );
-
+    Math.round(
+      (answered / total) * 100
+    );
 
   document.getElementById(
     "progress"
   ).style.width =
     percentage + "%";
 
-
   document.getElementById(
     "progressText"
   ).textContent =
     percentage + "%";
-
 }
 
 
@@ -265,9 +189,9 @@ document.addEventListener(
 );
 
 
-// ==========================================
-// GÖNDƏR
-// ==========================================
+/* =========================
+   SORĞUNU GÖNDƏR
+========================= */
 
 document
   .getElementById("submitBtn")
@@ -283,10 +207,12 @@ document
           .value
           .trim();
 
+
       const message =
         document.getElementById(
           "message"
         );
+
 
       const button =
         document.getElementById(
@@ -294,7 +220,7 @@ document
         );
 
 
-      // AD
+      /* AD YOXLAMASI */
 
       if (!name) {
 
@@ -311,24 +237,18 @@ document
       }
 
 
-      // ====================================
-      // MƏLUMATLIQLIQ
-      // ====================================
+      /* =========================
+         MƏLUMATLILIQ
+      ========================= */
 
       const awarenessAnswers = [];
 
-      for (
-        let i = 1;
-        i <= 5;
-        i++
-      ) {
+      for (let i = 1; i <= 5; i++) {
 
         const answer =
           getAnswer(`q${i}`);
 
-        if (
-          answer === null
-        ) {
+        if (answer === null) {
 
           message.textContent =
             `⚠️ Məlumatlılıq bölməsində Sual ${i} cavablandırılmayıb.`;
@@ -336,33 +256,24 @@ document
           return;
         }
 
-        awarenessAnswers.push(
-          answer
-        );
-
+        awarenessAnswers.push(answer);
       }
 
 
-      // ====================================
-      // TƏHLÜKƏSİZLİK
-      // ====================================
+      /* =========================
+         TƏHLÜKƏSİZLİK DAVRANIŞI
+      ========================= */
 
       const securityAnswers = [];
 
-      for (
-        let i = 1;
-        i <= 5;
-        i++
-      ) {
+      for (let i = 1; i <= 5; i++) {
 
         const answer =
           getAnswer(
             `security${i}`
           );
 
-        if (
-          answer === null
-        ) {
+        if (answer === null) {
 
           message.textContent =
             `⚠️ Təhlükəsizlik davranışı bölməsində Sual ${i} cavablandırılmayıb.`;
@@ -370,33 +281,24 @@ document
           return;
         }
 
-        securityAnswers.push(
-          answer
-        );
-
+        securityAnswers.push(answer);
       }
 
 
-      // ====================================
-      // RƏQƏMSAL
-      // ====================================
+      /* =========================
+         RƏQƏMSAL DAVRANIŞ
+      ========================= */
 
       const digitalAnswers = [];
 
-      for (
-        let i = 1;
-        i <= 5;
-        i++
-      ) {
+      for (let i = 1; i <= 5; i++) {
 
         const answer =
           getAnswer(
             `digital${i}`
           );
 
-        if (
-          answer === null
-        ) {
+        if (answer === null) {
 
           message.textContent =
             `⚠️ Rəqəmsal davranış bölməsində Sual ${i} cavablandırılmayıb.`;
@@ -404,16 +306,13 @@ document
           return;
         }
 
-        digitalAnswers.push(
-          answer
-        );
-
+        digitalAnswers.push(answer);
       }
 
 
-      // ====================================
-      // BALLAR
-      // ====================================
+      /* =========================
+         BALLAR
+      ========================= */
 
       const awarenessScore =
         awarenessAnswers.reduce(
@@ -422,12 +321,14 @@ document
           0
         );
 
+
       const securityScore =
         securityAnswers.reduce(
           (sum, value) =>
             sum + value,
           0
         );
+
 
       const digitalScore =
         digitalAnswers.reduce(
@@ -436,15 +337,16 @@ document
           0
         );
 
+
       const totalScore =
         awarenessScore +
         securityScore +
         digitalScore;
 
 
-      // ====================================
-      // CAVABLAR
-      // ====================================
+      /* =========================
+         CAVABLAR
+      ========================= */
 
       const answers = {
 
@@ -460,16 +362,19 @@ document
       };
 
 
-      // ====================================
-      // SUPABASE
-      // ====================================
+      /* =========================
+         GÖNDƏRİLİR
+      ========================= */
 
-      button.disabled =
-        true;
+      button.disabled = true;
 
       button.innerHTML =
         "<span>Göndərilir...</span>";
 
+
+      /* =========================
+         SUPABASE
+      ========================= */
 
       const { error } =
         await supabaseClient
@@ -499,18 +404,15 @@ document
           });
 
 
-      // ====================================
-      // XƏTA
-      // ====================================
+      /* =========================
+         XƏTA
+      ========================= */
 
       if (error) {
 
-        console.error(
-          error
-        );
+        console.error(error);
 
-        button.disabled =
-          false;
+        button.disabled = false;
 
         button.innerHTML =
           "<span>Sorğunu göndər</span><b>→</b>";
@@ -522,9 +424,9 @@ document
       }
 
 
-      // ====================================
-      // UĞURLU
-      // ====================================
+      /* =========================
+         UĞURLU
+      ========================= */
 
       document.getElementById(
         "survey"
@@ -563,8 +465,3 @@ document
 
     }
   );
-
-
-// İlk açılış
-updateProgress();
-```
