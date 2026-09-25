@@ -11,24 +11,6 @@ const supabaseClient =
     SUPABASE_KEY
   );
 
-
-/* =========================
-   DÜZGÜN CAVABLAR
-========================= */
-
-const correctAnswers = [
-  "C",
-  "C",
-  "C",
-  "B",
-  "C"
-];
-
-
-/* =========================
-   SUALLAR
-========================= */
-
 const securityQuestions = [
   "İş və ya universitet hesablarım üçün eyni parolu başqa platformalarda istifadə etmirəm.",
   "Vacib hesablarımda iki mərhələli doğrulamanı (2FA/MFA) aktiv etmişəm.",
@@ -44,11 +26,6 @@ const digitalQuestions = [
   "Şəxsi məlumatlarımı onlayn xidmətə təqdim etməzdən əvvəl həmin məlumatın niyə tələb olunduğunu düşünürəm.",
   "Sosial şəbəkələrdə məxfilik parametrlərimi və tətbiqlərin hesabıma giriş icazələrini vaxtaşırı yoxlayıram."
 ];
-
-
-/* =========================
-   LIKERT SUALLARI
-========================= */
 
 function createScaleQuestion(text, number, prefix) {
 
@@ -92,16 +69,10 @@ function createScaleQuestion(text, number, prefix) {
   return div;
 }
 
-
-/* =========================
-   SUALLARI YARAT
-========================= */
-
 const securityContainer =
   document.getElementById("securityQuestions");
 
 securityQuestions.forEach((question, index) => {
-
   securityContainer.appendChild(
     createScaleQuestion(
       question,
@@ -109,15 +80,12 @@ securityQuestions.forEach((question, index) => {
       "security"
     )
   );
-
 });
-
 
 const digitalContainer =
   document.getElementById("digitalQuestions");
 
 digitalQuestions.forEach((question, index) => {
-
   digitalContainer.appendChild(
     createScaleQuestion(
       question,
@@ -125,13 +93,7 @@ digitalQuestions.forEach((question, index) => {
       "digital"
     )
   );
-
 });
-
-
-/* =========================
-   CAVAB AL
-========================= */
 
 function getAnswer(name) {
 
@@ -141,14 +103,9 @@ function getAnswer(name) {
     );
 
   return selected
-    ? selected.value
+    ? Number(selected.value)
     : null;
 }
-
-
-/* =========================
-   PROGRESS
-========================= */
 
 function updateProgress() {
 
@@ -157,8 +114,7 @@ function updateProgress() {
       'input[type="radio"]'
     );
 
-  const questionNames =
-    new Set();
+  const questionNames = new Set();
 
   allQuestions.forEach(input => {
     questionNames.add(input.name);
@@ -201,11 +157,6 @@ document.addEventListener(
   updateProgress
 );
 
-
-/* =========================
-   GÖNDƏR
-========================= */
-
 document
   .getElementById("submitBtn")
   .addEventListener(
@@ -224,9 +175,6 @@ document
       const button =
         document.getElementById("submitBtn");
 
-
-      /* AD */
-
       if (!name) {
 
         message.textContent =
@@ -238,11 +186,6 @@ document
 
         return;
       }
-
-
-      /* =========================
-         MƏLUMATLILIQ
-      ========================= */
 
       const awarenessAnswers = [];
 
@@ -262,28 +205,6 @@ document
         awarenessAnswers.push(answer);
       }
 
-
-      /* DÜZGÜN CAVABLARI YOXLAYIR */
-
-      let awarenessScore = 0;
-
-      awarenessAnswers.forEach(
-        (answer, index) => {
-
-          if (
-            answer === correctAnswers[index]
-          ) {
-            awarenessScore++;
-          }
-
-        }
-      );
-
-
-      /* =========================
-         TƏHLÜKƏSİZLİK
-      ========================= */
-
       const securityAnswers = [];
 
       for (let i = 1; i <= 5; i++) {
@@ -299,15 +220,8 @@ document
           return;
         }
 
-        securityAnswers.push(
-          Number(answer)
-        );
+        securityAnswers.push(answer);
       }
-
-
-      /* =========================
-         RƏQƏMSAL DAVRANIŞ
-      ========================= */
 
       const digitalAnswers = [];
 
@@ -324,15 +238,15 @@ document
           return;
         }
 
-        digitalAnswers.push(
-          Number(answer)
-        );
+        digitalAnswers.push(answer);
       }
 
-
-      /* =========================
-         BALLAR
-      ========================= */
+      const awarenessScore =
+        awarenessAnswers.reduce(
+          (sum, value) =>
+            sum + value,
+          0
+        );
 
       const securityScore =
         securityAnswers.reduce(
@@ -353,13 +267,7 @@ document
         securityScore +
         digitalScore;
 
-
-      /* =========================
-         SUPABASE
-      ========================= */
-
       const answers = {
-
         awareness:
           awarenessAnswers,
 
@@ -368,21 +276,17 @@ document
 
         digital:
           digitalAnswers
-
       };
-
 
       button.disabled = true;
 
       button.innerHTML =
         "<span>Göndərilir...</span>";
 
-
       const { error } =
         await supabaseClient
           .from("survey_responses")
           .insert({
-
             participant_name:
               name,
 
@@ -400,13 +304,7 @@ document
 
             total_score:
               totalScore
-
           });
-
-
-      /* =========================
-         XƏTA
-      ========================= */
 
       if (error) {
 
@@ -418,20 +316,14 @@ document
           "<span>Sorğunu göndər</span><b>→</b>";
 
         message.textContent =
-          "❌ Cavabları göndərmək mümkün olmadı. Yenidən cəhd edin.";
+          "❌ Cavabları göndərmək mümkün olmadı. Zəhmət olmasa yenidən cəhd edin.";
 
         return;
       }
 
-
-      /* =========================
-         UĞURLU NƏTİCƏ
-      ========================= */
-
       document.getElementById(
         "survey"
       ).innerHTML = `
-
         <div class="success">
 
           <div class="success-icon">
@@ -446,47 +338,11 @@ document
             İştirakınıza görə təşəkkür edirik.
           </p>
 
-          <div class="result-section">
-
-            <h3>Məlumatlılıq</h3>
-
-            <p>
-              ${awarenessScore}/5
-            </p>
-
-          </div>
-
-          <div class="result-section">
-
-            <h3>Təhlükəsizlik davranışı</h3>
-
-            <p>
-              ${securityScore}/25
-            </p>
-
-          </div>
-
-          <div class="result-section">
-
-            <h3>Rəqəmsal davranış</h3>
-
-            <p>
-              ${digitalScore}/25
-            </p>
-
-          </div>
-
-          <div class="grand-total">
-
-            Ümumi nəticə:
-            <strong>
-              ${totalScore}/55
-            </strong>
-
-          </div>
+          <p>
+            Cavablarınız uğurla qeydə alındı.
+          </p>
 
         </div>
-
       `;
 
       window.scrollTo({
