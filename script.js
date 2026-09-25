@@ -1,4 +1,3 @@
-```javascript
 const SUPABASE_URL =
   "https://tzrmnihtnhfvblxfmpmq.supabase.co";
 
@@ -10,6 +9,11 @@ const supabaseClient =
     SUPABASE_URL,
     SUPABASE_KEY
   );
+
+
+/* =========================
+   SUALLAR
+========================= */
 
 const securityQuestions = [
   "İş və ya universitet hesablarım üçün eyni parolu başqa platformalarda istifadə etmirəm.",
@@ -26,6 +30,11 @@ const digitalQuestions = [
   "Şəxsi məlumatlarımı onlayn xidmətə təqdim etməzdən əvvəl həmin məlumatın niyə tələb olunduğunu düşünürəm.",
   "Sosial şəbəkələrdə məxfilik parametrlərimi və tətbiqlərin hesabıma giriş icazələrini vaxtaşırı yoxlayıram."
 ];
+
+
+/* =========================
+   LIKERT SUALLARI YARAT
+========================= */
 
 function createScaleQuestion(text, number, prefix) {
 
@@ -69,10 +78,16 @@ function createScaleQuestion(text, number, prefix) {
   return div;
 }
 
+
+/* =========================
+   SUALLARI HTML-Ə ƏLAVƏ ET
+========================= */
+
 const securityContainer =
   document.getElementById("securityQuestions");
 
 securityQuestions.forEach((question, index) => {
+
   securityContainer.appendChild(
     createScaleQuestion(
       question,
@@ -80,12 +95,15 @@ securityQuestions.forEach((question, index) => {
       "security"
     )
   );
+
 });
+
 
 const digitalContainer =
   document.getElementById("digitalQuestions");
 
 digitalQuestions.forEach((question, index) => {
+
   digitalContainer.appendChild(
     createScaleQuestion(
       question,
@@ -93,7 +111,13 @@ digitalQuestions.forEach((question, index) => {
       "digital"
     )
   );
+
 });
+
+
+/* =========================
+   CAVAB AL
+========================= */
 
 function getAnswer(name) {
 
@@ -107,6 +131,11 @@ function getAnswer(name) {
     : null;
 }
 
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
 function updateProgress() {
 
   const allQuestions =
@@ -114,7 +143,8 @@ function updateProgress() {
       'input[type="radio"]'
     );
 
-  const questionNames = new Set();
+  const questionNames =
+    new Set();
 
   allQuestions.forEach(input => {
     questionNames.add(input.name);
@@ -152,10 +182,16 @@ function updateProgress() {
     percentage + "%";
 }
 
+
 document.addEventListener(
   "change",
   updateProgress
 );
+
+
+/* =========================
+   SORĞUNU GÖNDƏR
+========================= */
 
 document
   .getElementById("submitBtn")
@@ -165,15 +201,26 @@ document
 
       const name =
         document
-          .getElementById("participantName")
+          .getElementById(
+            "participantName"
+          )
           .value
           .trim();
 
+
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
+
 
       const button =
-        document.getElementById("submitBtn");
+        document.getElementById(
+          "submitBtn"
+        );
+
+
+      /* AD YOXLAMASI */
 
       if (!name) {
 
@@ -181,11 +228,18 @@ document
           "⚠️ Zəhmət olmasa ad və soyadınızı daxil edin.";
 
         document
-          .getElementById("participantName")
+          .getElementById(
+            "participantName"
+          )
           .focus();
 
         return;
       }
+
+
+      /* =========================
+         MƏLUMATLILIQ
+      ========================= */
 
       const awarenessAnswers = [];
 
@@ -205,12 +259,19 @@ document
         awarenessAnswers.push(answer);
       }
 
+
+      /* =========================
+         TƏHLÜKƏSİZLİK DAVRANIŞI
+      ========================= */
+
       const securityAnswers = [];
 
       for (let i = 1; i <= 5; i++) {
 
         const answer =
-          getAnswer(`security${i}`);
+          getAnswer(
+            `security${i}`
+          );
 
         if (answer === null) {
 
@@ -223,12 +284,19 @@ document
         securityAnswers.push(answer);
       }
 
+
+      /* =========================
+         RƏQƏMSAL DAVRANIŞ
+      ========================= */
+
       const digitalAnswers = [];
 
       for (let i = 1; i <= 5; i++) {
 
         const answer =
-          getAnswer(`digital${i}`);
+          getAnswer(
+            `digital${i}`
+          );
 
         if (answer === null) {
 
@@ -241,12 +309,18 @@ document
         digitalAnswers.push(answer);
       }
 
+
+      /* =========================
+         BALLAR
+      ========================= */
+
       const awarenessScore =
         awarenessAnswers.reduce(
           (sum, value) =>
             sum + value,
           0
         );
+
 
       const securityScore =
         securityAnswers.reduce(
@@ -255,6 +329,7 @@ document
           0
         );
 
+
       const digitalScore =
         digitalAnswers.reduce(
           (sum, value) =>
@@ -262,12 +337,19 @@ document
           0
         );
 
+
       const totalScore =
         awarenessScore +
         securityScore +
         digitalScore;
 
+
+      /* =========================
+         CAVABLAR
+      ========================= */
+
       const answers = {
+
         awareness:
           awarenessAnswers,
 
@@ -276,17 +358,31 @@ document
 
         digital:
           digitalAnswers
+
       };
+
+
+      /* =========================
+         GÖNDƏRİLİR
+      ========================= */
 
       button.disabled = true;
 
       button.innerHTML =
         "<span>Göndərilir...</span>";
 
+
+      /* =========================
+         SUPABASE
+      ========================= */
+
       const { error } =
         await supabaseClient
-          .from("survey_responses")
+          .from(
+            "survey_responses"
+          )
           .insert({
+
             participant_name:
               name,
 
@@ -304,7 +400,13 @@ document
 
             total_score:
               totalScore
+
           });
+
+
+      /* =========================
+         XƏTA
+      ========================= */
 
       if (error) {
 
@@ -321,9 +423,15 @@ document
         return;
       }
 
+
+      /* =========================
+         UĞURLU
+      ========================= */
+
       document.getElementById(
         "survey"
       ).innerHTML = `
+
         <div class="success">
 
           <div class="success-icon">
@@ -343,13 +451,17 @@ document
           </p>
 
         </div>
+
       `;
 
+
       window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
       });
 
     }
   );
-```
