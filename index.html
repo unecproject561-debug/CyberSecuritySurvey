@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CyberSafe — Təhlükəsiz davranış sorğusu</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="background">
+
+  <div class="survey-wrapper">
+
+    <div class="top-line"></div>
+
+    <header class="header">
+
+      <div class="header-row">
+
+        <div class="logo">
+          <span>◈</span>
+          CYBER<span>SAFE</span>
+        </div>
+
+        <div class="status">
+          <span class="status-dot"></span>
+          Tədqiqat sorğusu
+        </div>
+
+      </div>
+
+      <h1>
+        Rəqəmsal mühitdə<br>
+        <span>təhlükəsiz davranış</span>
+      </h1>
+
+      <p>
+        Bu sorğu kibertəhlükəsizlik məlumatlılığı,
+        təhlükəsizlik vərdişləri və rəqəmsal davranış
+        arasındakı əlaqənin statistik təhlili üçün hazırlanmışdır.
+      </p>
+
+    </header>
+
+
+    <div class="progress-area">
+
+      <div class="progress-info">
+        <span>Sorğunun tamamlanması</span>
+        <strong id="progressText">0%</strong>
+      </div>
+
+      <div class="progress-bar">
+        <div id="progress"></div>
+      </div>
+
+    </div>
+
+
+    <div id="survey">
+
+      <section class="section-block">
+
+        <div class="section-title">
+
+          <div class="section-icon">
+            01
+          </div>
+
+          <div>
+            <small>İŞTİRAKÇI</small>
+
+            <h2>Başlayaq</h2>
+
+            <p class="section-text">
+              Zəhmət olmasa adınızı və soyadınızı qeyd edin.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="name-card">
+
+          <label for="participantName">
+            Ad və soyad
+          </label>
+
+          <input
+            type="text"
+            id="participantName"
+            placeholder="Adınızı və soyadınızı daxil edin"
+            autocomplete="off"
+          >
+
+          <div class="input-hint">
+            ℹ️ Məlumat yalnız tədqiqat məqsədilə istifadə olunur.
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="section-block">
+
+        <div class="section-title">
+
+          <div class="section-icon">
+            02
+          </div>
+
+          <div>
+            <small>BÖLMƏ I</small>
+
+            <h2>
+              Kibertəhlükəsizlik məlumatlılığı
+            </h2>
+          </div>
+
+        </div>
+
+
+        <div class="section-description">
+
+          Burada gündəlik həyatda qarşılaşa biləcəyiniz
+          real kibertəhlükəsizlik situasiyaları təqdim olunur.
+
+        </div>
+
+
+        <div class="question-card">
+
+          <div class="question-top">
+            <span>01</span>
+            <label>MƏLUMATLIQ</label>
+          </div>
+
+          <h3>
+            Universitetdən sizə hesabınızın
+            “24 saat ərzində deaktiv ediləcəyi” barədə email
+            gəlir. Göndərənin domeni universitet domenindən
+            yalnız bir simvol ilə fərqlənir. Emaildəki link
+            isə giriş səhifəsinə aparır. Hansı addım daha
+            təhlükəsizdir?
+          </h3>
+
+          <div class="options">
+
+            <label class="option">
+              <input type="radio" name="q1" value="0">
+              <span class="radio"></span>
+              <span>
+                Emaildəki linkdən daxil olub hesabı yoxlamaq.
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q1" value="1">
+              <span class="radio"></span>
+              <span>
+                Linkdən istifadə etmədən universitetin rəsmi
+                saytına daxil olub IT şöbəsi ilə əlaqə saxlamaq.
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q1" value="0">
+              <span class="radio"></span>
+              <span>
+                Emaili dostlara göndərib onların fikrini soruşmaq.
+              </span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+          <div class="question-top">
+            <span>02</span>
+            <label>MƏLUMATLIQ</label>
+          </div>
+
+          <h3>
+            Sayt HTTPS istifadə edir, lakin domen adında şirkətin
+            adının bir hərfi dəyişdirilib. Sayt sizdən bank məlumatı
+            istəyir. Ən düzgün davranış hansıdır?
+          </h3>
+
+          <div class="options">
+
+            <label class="option">
+              <input type="radio" name="q2" value="0">
+              <span class="radio"></span>
+              <span>
+                HTTPS olduğuna görə məlumatları daxil etmək.
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q2" value="1">
+              <span class="radio"></span>
+              <span>
+                Domeni yoxlamaq və şirkətin rəsmi saytına ayrıca daxil olmaq.
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q2" value="0">
+              <span class="radio"></span>
+              <span>
+                Saytın görünüşü real olduğu üçün davam etmək.
+              </span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+          <div class="question-top">
+            <span>03</span>
+            <label>MƏLUMATLIQ</label>
+          </div>
+
+          <h3>
+            Tanımadığınız bir şəxsdən WhatsApp vasitəsilə
+            “sizin haqqınızda hazırlanmış sənəd” adlı PDF
+            gəlir. Faylın arxasınca göndərən şəxs sizdən
+            Microsoft hesabınızla giriş etməyinizi istəyir.
+            Ən böyük risk nədir?
+          </h3>
+
+          <div class="options">
+
+            <label class="option">
+              <input type="radio" name="q3" value="0">
+              <span class="radio"></span>
+              <span>
+                PDF faylının böyük olması.
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q3" value="1">
+              <span class="radio"></span>
+              <span>
+                Fayl və giriş səhifəsinin fişinq və ya zərərli
+                proqram üçün istifadə olunması.
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q3" value="0">
+              <span class="radio"></span>
+              <span>
+                WhatsApp-ın PDF fayllarını dəstəkləməməsi.
+              </span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+          <div class="question-top">
+            <span>04</span>
+            <label>MƏLUMATLIQ</label>
+          </div>
+
+          <h3>
+            Telefonunuza ardıcıl olaraq “Girişə icazə verilsin?”
+            bildirişləri gəlir. Siz heç bir giriş etməmisiniz.
+            Bildirişlər davamlı gəldiyi üçün təsadüfən birini
+            təsdiqləmək fikrindəsiniz. Bu hücum hansı üsulla
+            əlaqəli ola bilər?
+          </h3>
+
+          <div class="options">
+
+            <label class="option">
+              <input type="radio" name="q4" value="0">
+              <span class="radio"></span>
+              <span>DDoS hücumu.</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q4" value="1">
+              <span class="radio"></span>
+              <span>
+                MFA fatigue / push bombing hücumu.
+              </span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q4" value="0">
+              <span class="radio"></span>
+              <span>
+                DNS keş yaddaşının problemi.
+              </span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+          <div class="question-top">
+            <span>05</span>
+            <label>MƏLUMATLIQ</label>
+          </div>
+
+          <h3>
+            Kompüterdə sənədlər açılmır, fayl adlarının sonuna
+            naməlum uzantı əlavə olunub və ekranda faylları
+            bərpa etmək üçün ödəniş tələb edilir. İlk növbədə
+            hansı hadisədən şübhələnmək lazımdır?
+          </h3>
+
+          <div class="options">
+
+            <label class="option">
+              <input type="radio" name="q5" value="1">
+              <span class="radio"></span>
+              <span>Ransomware hücumu.</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q5" value="0">
+              <span class="radio"></span>
+              <span>Sadə proqram yenilənməsi.</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q5" value="0">
+              <span class="radio"></span>
+              <span>Wi-Fi siqnalının zəifləməsi.</span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="section-title second">
+
+          <div class="section-icon">
+            03
+          </div>
+
+          <div>
+            <small>BÖLMƏ II</small>
+
+            <h2>Təhlükəsizlik davranışı</h2>
+          </div>
+
+        </div>
+
+
+        <div class="section-description">
+          Aşağıdakı ifadələrə gündəlik davranışınızı nəzərə
+          alaraq cavab verin.
+        </div>
+
+
+        <div id="securityQuestions"></div>
+
+
+        <div class="section-title second">
+
+          <div class="section-icon">
+            04
+          </div>
+
+          <div>
+            <small>BÖLMƏ III</small>
+
+            <h2>Rəqəmsal davranış</h2>
+          </div>
+
+        </div>
+
+
+        <div class="section-description">
+          İnternet və sosial media istifadəniz zamanı
+          real davranışınızı nəzərə alın.
+        </div>
+
+
+        <div id="digitalQuestions"></div>
+
+
+        <div class="submit-box">
+
+          <div class="submit-icon">
+            ✓
+          </div>
+
+          <h2>
+            Demək olar ki, hazırdır!
+          </h2>
+
+          <p>
+            Bütün cavabları yoxladıqdan sonra sorğunu göndərin.
+          </p>
+
+          <button id="submitBtn">
+
+            <span>
+              Sorğunu göndər
+            </span>
+
+            <b>
+              →
+            </b>
+
+          </button>
+
+          <div id="message"></div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <footer>
+
+      Kibertəhlükəsizlik üzrə akademik tədqiqat
+
+      <span>•</span>
+
+      2026
+
+    </footer>
+
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
