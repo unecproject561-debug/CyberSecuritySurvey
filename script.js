@@ -1,3 +1,4 @@
+```javascript
 const SUPABASE_URL =
   "https://tzrmnihtnhfvblxfmpmq.supabase.co";
 
@@ -9,6 +10,19 @@ const supabaseClient =
     SUPABASE_URL,
     SUPABASE_KEY
   );
+
+
+/* =========================
+   DÜZGÜN CAVABLAR
+========================= */
+
+const correctAnswers = [
+  "C",
+  "C",
+  "C",
+  "B",
+  "C"
+];
 
 
 /* =========================
@@ -33,7 +47,7 @@ const digitalQuestions = [
 
 
 /* =========================
-   LIKERT SUALLARI YARAT
+   LIKERT SUALLARI
 ========================= */
 
 function createScaleQuestion(text, number, prefix) {
@@ -80,7 +94,7 @@ function createScaleQuestion(text, number, prefix) {
 
 
 /* =========================
-   SUALLARI HTML-Ə ƏLAVƏ ET
+   SUALLARI YARAT
 ========================= */
 
 const securityContainer =
@@ -127,13 +141,13 @@ function getAnswer(name) {
     );
 
   return selected
-    ? Number(selected.value)
+    ? selected.value
     : null;
 }
 
 
 /* =========================
-   PROGRESS BAR
+   PROGRESS
 ========================= */
 
 function updateProgress() {
@@ -182,7 +196,6 @@ function updateProgress() {
     percentage + "%";
 }
 
-
 document.addEventListener(
   "change",
   updateProgress
@@ -190,7 +203,7 @@ document.addEventListener(
 
 
 /* =========================
-   SORĞUNU GÖNDƏR
+   GÖNDƏR
 ========================= */
 
 document
@@ -201,26 +214,18 @@ document
 
       const name =
         document
-          .getElementById(
-            "participantName"
-          )
+          .getElementById("participantName")
           .value
           .trim();
 
-
       const message =
-        document.getElementById(
-          "message"
-        );
-
+        document.getElementById("message");
 
       const button =
-        document.getElementById(
-          "submitBtn"
-        );
+        document.getElementById("submitBtn");
 
 
-      /* AD YOXLAMASI */
+      /* AD */
 
       if (!name) {
 
@@ -228,9 +233,7 @@ document
           "⚠️ Zəhmət olmasa ad və soyadınızı daxil edin.";
 
         document
-          .getElementById(
-            "participantName"
-          )
+          .getElementById("participantName")
           .focus();
 
         return;
@@ -260,8 +263,25 @@ document
       }
 
 
+      /* DÜZGÜN CAVABLARI YOXLAYIR */
+
+      let awarenessScore = 0;
+
+      awarenessAnswers.forEach(
+        (answer, index) => {
+
+          if (
+            answer === correctAnswers[index]
+          ) {
+            awarenessScore++;
+          }
+
+        }
+      );
+
+
       /* =========================
-         TƏHLÜKƏSİZLİK DAVRANIŞI
+         TƏHLÜKƏSİZLİK
       ========================= */
 
       const securityAnswers = [];
@@ -269,9 +289,7 @@ document
       for (let i = 1; i <= 5; i++) {
 
         const answer =
-          getAnswer(
-            `security${i}`
-          );
+          getAnswer(`security${i}`);
 
         if (answer === null) {
 
@@ -281,7 +299,9 @@ document
           return;
         }
 
-        securityAnswers.push(answer);
+        securityAnswers.push(
+          Number(answer)
+        );
       }
 
 
@@ -294,9 +314,7 @@ document
       for (let i = 1; i <= 5; i++) {
 
         const answer =
-          getAnswer(
-            `digital${i}`
-          );
+          getAnswer(`digital${i}`);
 
         if (answer === null) {
 
@@ -306,21 +324,15 @@ document
           return;
         }
 
-        digitalAnswers.push(answer);
+        digitalAnswers.push(
+          Number(answer)
+        );
       }
 
 
       /* =========================
          BALLAR
       ========================= */
-
-      const awarenessScore =
-        awarenessAnswers.reduce(
-          (sum, value) =>
-            sum + value,
-          0
-        );
-
 
       const securityScore =
         securityAnswers.reduce(
@@ -329,14 +341,12 @@ document
           0
         );
 
-
       const digitalScore =
         digitalAnswers.reduce(
           (sum, value) =>
             sum + value,
           0
         );
-
 
       const totalScore =
         awarenessScore +
@@ -345,7 +355,7 @@ document
 
 
       /* =========================
-         CAVABLAR
+         SUPABASE
       ========================= */
 
       const answers = {
@@ -362,25 +372,15 @@ document
       };
 
 
-      /* =========================
-         GÖNDƏRİLİR
-      ========================= */
-
       button.disabled = true;
 
       button.innerHTML =
         "<span>Göndərilir...</span>";
 
 
-      /* =========================
-         SUPABASE
-      ========================= */
-
       const { error } =
         await supabaseClient
-          .from(
-            "survey_responses"
-          )
+          .from("survey_responses")
           .insert({
 
             participant_name:
@@ -418,14 +418,14 @@ document
           "<span>Sorğunu göndər</span><b>→</b>";
 
         message.textContent =
-          "❌ Cavabları göndərmək mümkün olmadı. Zəhmət olmasa yenidən cəhd edin.";
+          "❌ Cavabları göndərmək mümkün olmadı. Yenidən cəhd edin.";
 
         return;
       }
 
 
       /* =========================
-         UĞURLU
+         UĞURLU NƏTİCƏ
       ========================= */
 
       document.getElementById(
@@ -446,22 +446,54 @@ document
             İştirakınıza görə təşəkkür edirik.
           </p>
 
-          <p>
-            Cavablarınız uğurla qeydə alındı.
-          </p>
+          <div class="result-section">
+
+            <h3>Məlumatlılıq</h3>
+
+            <p>
+              ${awarenessScore}/5
+            </p>
+
+          </div>
+
+          <div class="result-section">
+
+            <h3>Təhlükəsizlik davranışı</h3>
+
+            <p>
+              ${securityScore}/25
+            </p>
+
+          </div>
+
+          <div class="result-section">
+
+            <h3>Rəqəmsal davranış</h3>
+
+            <p>
+              ${digitalScore}/25
+            </p>
+
+          </div>
+
+          <div class="grand-total">
+
+            Ümumi nəticə:
+            <strong>
+              ${totalScore}/55
+            </strong>
+
+          </div>
 
         </div>
 
       `;
 
-
       window.scrollTo({
-
         top: 0,
-
         behavior: "smooth"
-
       });
 
     }
   );
+```
